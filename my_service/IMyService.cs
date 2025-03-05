@@ -6,9 +6,9 @@ namespace WCFMyServiceLibrary
     public interface IMyService
     {
         [OperationContract]
-        void WriteToFile(string text);
+        void WriteToFile(string text, string fileName = "text.txt");
 
         [OperationContract]
-        string ReadFromFile();
+        string ReadFromFile(string fileName = "text.txt");
     }
 }

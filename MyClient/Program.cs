@@ -17,14 +17,22 @@ namespace my_client
             ChannelFactory<IMyService> factory = new ChannelFactory<IMyService>(binding, address);
             // Открываем канал для общения клиента с со службой
             IMyService service = factory.CreateChannel();
-            service.WriteToFile("1");
-            service.WriteToFile("2");
-            service.WriteToFile("3");
 
-            Console.WriteLine("Текст записан в файл.");
+            // Записываем в первый файл
+            service.WriteToFile("Текст для первого файла: Привет! Я Дима!", "text.txt");
+            Console.WriteLine("Текст записан в файл text.txt.");
 
-            // Читаем из файла
-            Console.WriteLine(service.ReadFromFile());
+            // Записываем во второй файл
+            service.WriteToFile("Текст для второго файла: Привет! Я тоже Дима!", "text2.txt");
+            Console.WriteLine("Текст записан в файл text2.txt.");
+
+            // Читаем из первого файла
+            Console.WriteLine("Содержимое первого файла:");
+            Console.WriteLine(service.ReadFromFile("text.txt"));
+
+            // Читаем из второго файла
+            Console.WriteLine("Содержимое второго файла:");
+            Console.WriteLine(service.ReadFromFile("text2.txt"));
 
             Console.ReadLine();
         }

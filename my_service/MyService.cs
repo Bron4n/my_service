@@ -4,17 +4,21 @@ namespace WCFMyServiceLibrary
 {
     public class MyService : IMyService
     {
-        private const string FilePath = @"C:\Users\user\source\repos\my_service\MyHost\bin\Debug\text.txt";
+        private const string FilePath1 = @"C:\Users\user\source\repos\my_service\MyHost\bin\Debug\text.txt";
+        private const string FilePath2 = @"C:\Users\user\source\repos\my_service\MyHost\bin\Debug\text2.txt";
 
-        public void WriteToFile(string text)
+        // Запись
+        public void WriteToFile(string text, string fileName = "text.txt")
         {
-            File.WriteAllText(FilePath, text);
+            string filePath = fileName.ToLower() == "text2.txt" ? FilePath2 : FilePath1;
+            File.WriteAllText(filePath, text);
         }
 
-        public string ReadFromFile()
+        // Чтение
+        public string ReadFromFile(string fileName = "text.txt")
         {
-            string content = System.IO.File.ReadAllText(FilePath);
-            return content;
+            string filePath = fileName.ToLower() == "text2.txt" ? FilePath2 : FilePath1;
+            return File.Exists(filePath) ? File.ReadAllText(filePath) : "Файл не найден.";
         }
     }
 }
